@@ -7,6 +7,16 @@ dotenv.config(); // loads env varibles from .env file into process.env. This is 
 const app = express();  // creates an instance of an Express application, which will be used to handle HTTP requests and responses
 
 app.use(express.json()); // allows us to accept the JSON data in the req.body [Especially this acts as a **middleware**]
+
+app.get("/api/products", async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({ success: true, data: products })
+    } catch(error) {
+        console.log("error in fetching products:", error.message);
+        res.status(500).json({ success: false, message: "Server Error"});
+    }
+});
 app.post("/api/products", async (req, res) => {  // this app.post("/products, async (req, res) => sets up the route handler for GET request to /products. The handler function is asynchronous to allow for the use of await inside.
     
     /*Logic to fetch products from database goes here*/
