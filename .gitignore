@@ -1,2 +1,3 @@
 #for security purposes
 .env
+cred.js
