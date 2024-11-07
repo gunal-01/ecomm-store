@@ -6,12 +6,12 @@ import productRoutes from "./routes/product.route.js"; // routes
 
 dotenv.config(); // loads env varibles from .env file into process.env. This is necessary to use variables like MONGO_URI securely.
 const app = express();  // creates an instance of an Express application, which will be used to handle HTTP requests and responses
-
+const PORT = process.env.PORT || 5000
 app.use(express.json()); // allows us to accept the JSON data in the req.body [Especially this acts as a **middleware**]
 
 app.use("/api/products", productRoutes);
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     connectDB();
-    console.log("Server started at http://localhost:5000 ");
+    console.log("Server started at http://localhost:" + PORT);
 });
